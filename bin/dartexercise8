@@ -1,0 +1,81 @@
+Map<String, dynamic> processScores(List<dynamic> rawInputList) {
+  int totalValidScores = 0;
+  double scoreSum = 0;
+  int passCount = 0;
+  int failCount = 0;
+
+  print('--- Starting Score Evaluation Batch ---');
+
+  for (int i = 0; i < rawInputList.length; i++) {
+    var item = rawInputList[i];
+    try {
+      if (item == null) {
+        throw FormatException('Null value encountered');
+      }
+      double score = double.parse(item.toString());
+      if (score < 0 || score > 100) {
+        throw RangeError('Score $score is out of valid range (0-100)');
+      }
+      scoreSum += score;
+      totalValidScores++;
+      if (score >= 75.0) {
+        print(
+          '  [Index $i] Score: ${score.toStringAsFixed(1)} -> Result: PASSED',
+        );
+        passCount++;
+      } else {
+        print(
+          '  [Index $i] Score: ${score.toStringAsFixed(1)} -> Result: FAILED',
+        );
+        failCount++;
+      }
+    } catch (e) {
+      print(
+        '  [Index $i] Invalid Input ("$item"): Handled gracefully -> ${e.toString()}',
+      );
+    }
+  }
+  double average = totalValidScores > 0 ? (scoreSum / totalValidScores) : 0.0;
+  return {
+    'totalValid': totalValidScores,
+    'averageScore': average,
+    'passCount': passCount,
+    'failCount': failCount,
+  };
+}
+
+void main() {
+  print('==================================================');
+  print(' FEUNRMF - LOGIC PROBLEM SET');
+  print(' Student: Dart Logic Assessment (Week 8)');
+  print('==================================================\n');
+
+  print('--- TEST CASE 1: Standard Input Data ---');
+  List<dynamic> validData = [88.5, 92, 64.0, 75.0, 91.0];
+  Map<String, dynamic> result1 = processScores(validData);
+
+  print('\nSummary 1:');
+  print('  Valid Scores: ${result1['totalValid']}');
+  print(
+    '  Average Score: ${(result1['averageScore'] as double).toStringAsFixed(2)}',
+  );
+  print('  Passed: ${result1['passCount']} | Failed: ${result1['failCount']}');
+
+  print('\n--------------------------------------------------\n');
+
+  print('--- TEST CASE 2: Deliberate Bad Inputs (Testing try/catch) ---');
+  List<dynamic> mixedData = [95.0, "eighty-five", 42.5, -15.0, null, 82.0];
+
+  Map<String, dynamic> result2 = processScores(mixedData);
+
+  print('\nSummary 2:');
+  print('  Valid Scores Processed: ${result2['totalValid']}');
+  print(
+    '  Average Score: ${(result2['averageScore'] as double).toStringAsFixed(2)}',
+  );
+  print('  Passed: ${result2['passCount']} | Failed: ${result2['failCount']}');
+
+  print('\n==================================================');
+  print(' Program completed successfully without crashing.');
+  print('==================================================');
+}
