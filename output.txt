@@ -1,0 +1,38 @@
+==================================================
+ FEUNRMF - LOGIC PROBLEM SET
+ Student: Dart Logic Assessment (Week 8)
+==================================================
+
+--- TEST CASE 1: Standard Input Data ---
+--- Starting Score Evaluation Batch ---
+  [Index 0] Score: 88.5 -> Result: PASSED
+  [Index 1] Score: 92.0 -> Result: PASSED
+  [Index 2] Score: 64.0 -> Result: FAILED
+  [Index 3] Score: 75.0 -> Result: PASSED
+  [Index 4] Score: 91.0 -> Result: PASSED
+
+Summary 1:
+  Valid Scores: 5
+  Average Score: 82.10
+  Passed: 4 | Failed: 1
+
+--------------------------------------------------
+
+--- TEST CASE 2: Deliberate Bad Inputs (Testing try/catch) ---
+--- Starting Score Evaluation Batch ---
+  [Index 0] Score: 95.0 -> Result: PASSED
+  [Index 1] Invalid Input ("eighty-five"): Handled gracefully -> FormatException: Invalid double
+eighty-five
+  [Index 2] Score: 42.5 -> Result: FAILED
+  [Index 3] Invalid Input ("-15"): Handled gracefully -> RangeError: Score -15 is out of valid range (0-100)
+  [Index 4] Invalid Input ("null"): Handled gracefully -> FormatException: Null value encountered
+  [Index 5] Score: 82.0 -> Result: PASSED
+
+Summary 2:
+  Valid Scores Processed: 3
+  Average Score: 73.17
+  Passed: 2 | Failed: 1
+
+==================================================
+ Program completed successfully without crashing.
+==================================================
